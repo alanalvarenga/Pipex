@@ -1,0 +1,2 @@
+O fd teste.txt: 3
+O duplicado fd: 1
