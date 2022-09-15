@@ -8,11 +8,12 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 PATH_SRC = ./SRC/
 PATH_SRC_BONUS = ./SRC_BONUS/
-FILES = pipex.c exec_utils.c
+FILES = pipex.c exec_utils.c parse_utils.c
 OBJECTS = $(FILES:.c=.o)
 #FILES_BONUS =
 #OBJECTS_BONUS = $(FILES_BONUS:.c=.o)
 RM = rm -f
+VAL = valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.txt
 
 all: $(NAME)
 
