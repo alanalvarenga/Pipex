@@ -6,11 +6,11 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:28:44 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/16 01:04:31 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:06:56 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static char	*get_cmd(char **paths, char *cmd)
 {

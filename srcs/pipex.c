@@ -6,11 +6,11 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 23:49:17 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/15 23:52:14 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:06:49 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 void	ft_error_file(char *str, int err_exit)
 {

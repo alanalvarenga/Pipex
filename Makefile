@@ -1,58 +1,41 @@
-NAME = pipex.a
-#NAME_BONUS = pipex_bonus.a
+NAME = ./pipex
+NAME_BONUS = ./pipex_bonus
 LIBFT_PATH = ./Libft
-INCLUDE = pipex.h
-#INCLUDE_BONUS = pipex_bonus.h
 LIBFT = $(LIBFT_PATH)/libft.a
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-PATH_SRC = ./SRC/
-PATH_SRC_BONUS = ./SRC_BONUS/
+PATH_SRC = srcs
 FILES = pipex.c exec_utils.c parse_utils.c
-OBJECTS = $(FILES:.c=.o)
-#FILES_BONUS =
-#OBJECTS_BONUS = $(FILES_BONUS:.c=.o)
-RM = rm -f
+SRC = $(addprefix $(PATH_SRC)/,$(FILES))
+PATH_SRC_BONUS = srcs_bonus
+FILES_BONUS = pipex_bonus.c
+SRC_BONUS = $(addprefix $(PATH_SRC_BONUS)/,$(FILES_BONUS))
+RM = rm -rf
 VAL = valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.txt
 
 all: $(NAME)
 
 bonus: $(NAME_BONUS)
 
-$(NAME): $(OBJECTS)
-		@ make -C $(LIBFT_PATH)
-		@ mv $(LIBFT) $(NAME)
-		@ ar -rcs $(NAME) $(OBJECTS) $(INCLUDE)
+$(LIBFT):
+	@make -C $(LIBFT_PATH) --no-print-directory
 
-$(PATH_SRC)%.o: $(PATH_SRC)%.c $(INCLUDE)
-		@ $(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $(SRC) $(LIBFT)
 
-#$(NAME_BONUS): $(OBJECTS_BONUS) 
-#		@ make -C $(LIBFT_PATH)
-#		@ cp $(LIBFT) $(NAME_BONUS)
-#		@ mv $(LIBFT) $(NAME_BONUS)
-#		@ ar -rcs $(NAME_BONUS) $(OBJECTS_BONUS) $(INCLUDE_BONUS)
-#		@ cp $(NAME_BONUS) $(NAME)
-
-#$(PATH_SRC_BONUS)%.o: $(PATH_SRC_BONUS)%.c $(INCLUDE_BONUS)
-#		@ $(CC) $(CFLAGS) -c $< -o $@
+$(NAME_BONUS): $(LIBFT)
+	$(CC) $(CFLAGS) -o $@ $(SRC_BONUS) $(LIBFT)
+	@cp ./pipex_bonus ./pipex
 
 clean:
 	make clean -C $(LIBFT_PATH)
-	$(RM) $(OBJECTS) $(OBJECTS_BONUS)
 
 fclean: clean
 	make fclean -C $(LIBFT_PATH) 
 	$(RM) $(NAME)
-#$(NAME_BONUS)
+	$(RM) $(NAME_BONUS)
 
 re: fclean all
 
-testm: 
-	$(CC) $(CFLAGS) -o pipex $(FILES) $(NAME)
-
-testb:
-	gcc main2.c -g $(CFLAGS) && ./a.out
-# $(NAME_BONUS)
 .PHONY: all clean fclean re
 

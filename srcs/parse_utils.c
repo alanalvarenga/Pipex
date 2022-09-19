@@ -6,11 +6,11 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:01:09 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/16 01:04:16 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/16 22:07:02 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../pipex.h"
 
 static void	put_spaces(char *args)
 {
