@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 23:49:17 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/16 22:06:49 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:32:51 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int	main(int argc, char **argv, char **envp)
 	if (argc != 5)
 		ft_error_file("Invalid numbers of inputs\n", 2);
 	ft_init(&data, argc, argv, envp);
-	if (pipe(data.pipe) < 0)
+	if (pipe(data.pipes) < 0)
 		ft_error_file("Invalid pipe\n", 2);
 	data.pid[0] = fork();
 	if (data.pid[0] == 0)
@@ -71,8 +71,8 @@ int	main(int argc, char **argv, char **envp)
 		child_out(data, argv, envp);
 	close(data.infile);
 	close(data.outfile);
-	close(data.pipe[0]);
-	close(data.pipe[1]);
+	close(data.pipes[0]);
+	close(data.pipes[1]);
 	waitpid(data.pid[0], NULL, 0);
 	waitpid(data.pid[1], &data.exit_status, 0);
 	free_paths(&data);

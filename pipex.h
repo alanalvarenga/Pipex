@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/06 23:56:16 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/15 21:11:50 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/20 21:32:58 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ typedef struct s_data
 	pid_t	pid[2];
 	int		infile;
 	int		outfile;
-	int		pipe[2];
+	int		pipes[2];
 	int		exit_status;
 	char	*path;
 	char	*cmd;
