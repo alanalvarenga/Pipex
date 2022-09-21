@@ -6,11 +6,11 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:28:44 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 01:10:48 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/21 21:25:10 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../pipex.h"
+#include "../pipex_bonus.h"
 
 static char	*get_cmd(char **paths, char *cmd)
 {
@@ -46,7 +46,7 @@ static void	free_cmd(t_data *data)
 
 void	child_in(t_data data, char **argv, char **envp, int i)
 {
-	dup2(data.pipe[0][1], STDOUT_FILENO);
+	dup2(data.pipes[i][1], STDOUT_FILENO);
 	dup2(data.infile, 0);
 	close_pipes(&data);
 	close(data.infile);
@@ -63,7 +63,7 @@ void	child_in(t_data data, char **argv, char **envp, int i)
 
 void	child_mid(t_data data, char **argv, char **envp, int i)
 {
-	dup2(data.pipe[i][1], STDOUT_FILENO);
+	dup2(data.pipes[i][1], STDOUT_FILENO);
 	dup2(data.pipes[i - 1][0], 0);
 	close_pipes(&data);
 	parse_args(&data, argv[2 + i]);
@@ -72,18 +72,18 @@ void	child_mid(t_data data, char **argv, char **envp, int i)
 	{
 		free_cmd(&data);
 		free_paths(&data);
-		ft_error_file("Invalid command 1\n", COMMAND_NOT_FOUND);
+		ft_error_file("Invalid command\n", COMMAND_NOT_FOUND);
 	}
 	execve(data.cmd, data.args_cmd, envp);
 }
 
 void	child_out(t_data data, char **argv, char **envp, int i)
 {
-	dup2(data.pipe[i][1], STDIN_FILENO);
+	dup2(data.pipes[i - 1][0], STDIN_FILENO);
 	dup2(data.outfile, 1);
 	close_pipes(&data);
 	close(data.outfile);
-	parse_args(&data, argv[data.total_cmds]);
+	parse_args(&data, argv[2 + i]);
 	data.cmd = get_cmd(data.path_cmd, data.args_cmd[0]);
 	if (!data.cmd)
 	{

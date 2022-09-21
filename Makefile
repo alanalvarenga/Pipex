@@ -3,12 +3,12 @@ NAME_BONUS = ./pipex_bonus
 LIBFT_PATH = ./Libft
 LIBFT = $(LIBFT_PATH)/libft.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g3
 PATH_SRC = srcs
 FILES = pipex.c exec_utils.c parse_utils.c
 SRC = $(addprefix $(PATH_SRC)/,$(FILES))
 PATH_SRC_BONUS = srcs_bonus
-FILES_BONUS = pipex_bonus.c
+FILES_BONUS = pipex_bonus.c exec_utils_bonus.c parse_utils_bonus.c pipes_util_bonus.c
 SRC_BONUS = $(addprefix $(PATH_SRC_BONUS)/,$(FILES_BONUS))
 RM = rm -rf
 VAL = valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.txt

@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 22:38:05 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 00:53:02 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/21 02:32:47 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,19 @@ static char	*find_path(char **envp)
 	return (*envp + 5);
 }
 
+void	free_paths(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	while (data->path_cmd[i])
+	{
+		free(data->path_cmd[i]);
+		i++;
+	}
+	free(data->path_cmd);
+}
+
 static void	ft_init(t_data *data, int argc, char **argv, char **envp)
 {
 	data->outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0664);
@@ -40,7 +53,13 @@ static void	ft_init(t_data *data, int argc, char **argv, char **envp)
 	data->path = find_path(envp);
 	data->path_cmd = ft_split(data->path, ':');
 	data->total_cmds = argc - 3;
-	pipes_create(data, argc, argv, envp);
+	pipes_create(data, argv, envp);
+	free_paths(data);
+}
+
+int	ft_init_here_doc()
+{
+	return 0;
 }
 
 int	main(int argc, char **argv, char **envp)
@@ -48,11 +67,12 @@ int	main(int argc, char **argv, char **envp)
 	t_data	data;
 
 	if (argc < 5)
-		ft_error_file("Too few arguments\n", 2)
+		ft_error_file("Too few arguments\n", 2);
 	else if ((ft_strncmp(argv[1], "here_doc", 8) == 0) && (argc < 6))
-		ft_error_file("Too few arguments to here_doc\n", 2)
+		ft_error_file("Too few arguments to here_doc\n", 2);
 	else if ((ft_strncmp(argv[1], "here_doc", 8) == 0) && (argc >= 6))
-		ft_init_here_doc(&data, argc, argv, envp);
+		ft_init_here_doc();
+		//ft_init_here_doc(&data, argc, argv, envp);
 	else if (argc >= 5)
 		ft_init(&data, argc, argv, envp);
 

@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:18:11 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 01:49:46 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/21 23:58:05 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ void	allocate_data(t_data *data)
 	}
 }
 
+void	free_pid_pipes(t_data *data)
+{
+	int	i;
+
+	i = 0;
+	free(data->pid);
+	free(data->pipes);
+	while (i < data->total_cmds)
+	{
+		free(data->pipes[i]);
+		i++;
+	}
+}
+
 void	open_pipes(t_data *data)
 {
 	int	i;
@@ -33,8 +47,12 @@ void	open_pipes(t_data *data)
 	i = 0;
 	while (i < data->total_cmds)
 	{
-		if (pipe(data.pipes[i]) < 0)
+		if (pipe(data->pipes[i]) < 0)
+		{
+			free_paths(data);
 			ft_error_file("Invalid pipe\n", 2);
+		}
+		i++;
 	}
 }
 
@@ -45,12 +63,13 @@ void	close_pipes(t_data *data)
 	i = 0;
 	while (i < data->total_cmds)
 	{
-		close(data.pipes[i][0]);
-		close(data.pipes[i][1]);
+		close(data->pipes[i][0]);
+		close(data->pipes[i][1]);
+		i++;
 	}
 }
 
-void	pipes_create(t_data *data, int argc, char **argv, char **envp)
+void	pipes_create(t_data *data, char **argv, char **envp)
 {
 	int	i;
 
@@ -59,13 +78,17 @@ void	pipes_create(t_data *data, int argc, char **argv, char **envp)
 	i = 0;
 	while (i < data->total_cmds)
 	{
-		data.pid[i] = fork();
+		data->pid[i] = fork();
 		if ((i == 0) && (data->pid[i] == 0))
 			child_in(*data, argv, envp, i);
 		else if ((i < (data->total_cmds -1)) && (data->pid[i] == 0))
 			child_mid(*data, argv, envp, i);
-		else if ((data->pid[i] == 0))
+		else if (data->pid[i] == 0)
 			child_out(*data, argv, envp, i);
+		i++;
 	}
+	while ((i < data->total_cmds) && (data->pid[i]))
+		waitpid(data->pid[i], NULL, 0);
 	close_pipes(data);
+	free_pid_pipes(data);
 }

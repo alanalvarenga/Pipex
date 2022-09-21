@@ -1,0 +1,13 @@
+total 84
+drwxrwxr-x  6 coder coder  4096 Sep 21 02:08 .
+drwxr-xr-x 35 coder coder  4096 Sep 20 23:01 ..
+drwxrwxr-x  8 coder coder  4096 Sep 21 01:50 .git
+-rw-rw-r--  1 coder coder     0 Sep 21 02:08 infile
+drwxr-xr-x  2 coder coder  4096 Sep 21 01:54 Libft
+-rw-rw-r--  1 coder coder   908 Sep 21 01:58 Makefile
+-rwxrwxr-x  1 coder coder 22688 Sep 21 02:07 pipex
+-rwxrwxr-x  1 coder coder 22688 Sep 21 02:07 pipex_bonus
+-rw-rw-r--  1 coder coder  1739 Sep 21 02:05 pipex_bonus.h
+-rw-rw-r--  1 coder coder  1529 Sep 20 21:32 pipex.h
+drwxrwxr-x  2 coder coder  4096 Sep 16 22:31 srcs
+drwxrwxr-x  2 coder coder  4096 Sep 20 21:18 srcs_bonus

@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 21:11:59 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 01:47:47 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/21 02:05:03 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	child_in(t_data data, char **argv, char **envp, int i);
 void	child_mid(t_data data, char **argv, char **envp, int i);
 void	child_out(t_data data, char **argv, char **envp, int i);
 void	parse_args(t_data *data, char *args);
-void	pipes_create(t_data *data, int argc, char **argv, char **envp);
+void	pipes_create(t_data *data, char **argv, char **envp);
 void	close_pipes(t_data *data);
 
 #endif
