@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:18:11 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 23:58:05 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:04:36 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,13 @@ void	free_pid_pipes(t_data *data)
 	int	i;
 
 	i = 0;
-	free(data->pid);
-	free(data->pipes);
 	while (i < data->total_cmds)
 	{
 		free(data->pipes[i]);
 		i++;
 	}
+	free(data->pid);
+	free(data->pipes);
 }
 
 void	open_pipes(t_data *data)

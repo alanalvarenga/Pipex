@@ -8,7 +8,7 @@ PATH_SRC = srcs
 FILES = pipex.c exec_utils.c parse_utils.c
 SRC = $(addprefix $(PATH_SRC)/,$(FILES))
 PATH_SRC_BONUS = srcs_bonus
-FILES_BONUS = pipex_bonus.c exec_utils_bonus.c parse_utils_bonus.c pipes_util_bonus.c
+FILES_BONUS = pipex_bonus.c exec_utils_bonus.c parse_utils_bonus.c pipes_util_bonus.c here_doc_bonus.c
 SRC_BONUS = $(addprefix $(PATH_SRC_BONUS)/,$(FILES_BONUS))
 RM = rm -rf
 VAL = valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.txt
@@ -18,14 +18,14 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 $(LIBFT):
-	@make -C $(LIBFT_PATH) --no-print-directory
+	make -C $(LIBFT_PATH) --no-print-directory
 
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(SRC) $(LIBFT)
 
 $(NAME_BONUS): $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(SRC_BONUS) $(LIBFT)
-	@cp ./pipex_bonus ./pipex
+	cp ./pipex_bonus ./pipex
 
 clean:
 	make clean -C $(LIBFT_PATH)

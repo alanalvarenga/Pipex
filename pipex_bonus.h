@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 21:11:59 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 02:05:03 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/23 22:45:44 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ typedef struct s_data
 	int		outfile;
 	int		**pipes;
 	int		exit_status;
-	int		here_doc;
+	int		**here_doc;
+	int		have_here_doc;
 	int		total_cmds;
 	char	*path;
 	char	*cmd;
@@ -45,5 +46,7 @@ void	child_out(t_data data, char **argv, char **envp, int i);
 void	parse_args(t_data *data, char *args);
 void	pipes_create(t_data *data, char **argv, char **envp);
 void	close_pipes(t_data *data);
+void	ft_init_here_doc(t_data *data, int argc, char **argv, char **envp);
+char	*find_path(char **envp);
 
 #endif
