@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:28:44 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/20 21:34:05 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/24 23:38:27 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,10 @@ static void	free_cmd(t_data *data)
 
 void	child_in(t_data data, char **argv, char **envp)
 {
-	dup2(data.pipes[1], STDOUT_FILENO);
-	dup2(data.infile, 0);
+	if ((dup2(data.pipes[1], STDOUT_FILENO)) < 0)
+		ft_error_file("ERRO dup2\n", 2);
+	if ((dup2(data.infile, 0)) < 0)
+		ft_error_file("ERRO dup2\n", 2);
 	close(data.pipes[0]);
 	close(data.pipes[1]);
 	close(data.infile);
@@ -59,13 +61,16 @@ void	child_in(t_data data, char **argv, char **envp)
 		free_paths(&data);
 		ft_error_file("Invalid command 1\n", COMMAND_NOT_FOUND);
 	}
-	execve(data.cmd, data.args_cmd, envp);
+	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
+		ft_error_file("execve 1 error\n", -1);
 }
 
 void	child_out(t_data data, char **argv, char **envp)
 {
-	dup2(data.pipes[0], STDIN_FILENO);
-	dup2(data.outfile, 1);
+	if ((dup2(data.pipes[0], STDIN_FILENO)) < 0)
+		ft_error_file("ERRO dup2\n", 2);
+	if ((dup2(data.outfile, 1)) < 0)
+		ft_error_file("ERRO dup2\n", 2);
 	close(data.pipes[0]);
 	close(data.pipes[1]);
 	close(data.outfile);
@@ -77,5 +82,6 @@ void	child_out(t_data data, char **argv, char **envp)
 		free_paths(&data);
 		ft_error_file("Invalid command 2\n", COMMAND_NOT_FOUND);
 	}
-	execve(data.cmd, data.args_cmd, envp);
+	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
+		ft_error_file("execve 2 error\n", -1);
 }
