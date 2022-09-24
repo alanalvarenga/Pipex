@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/16 22:38:05 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/23 22:47:08 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:19:44 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,5 @@ int	main(int argc, char **argv, char **envp)
 		ft_init_here_doc(&data, argc, argv, envp);
 	else if (argc >= 5)
 		ft_init(&data, argc, argv, envp);
-
-	return 0;
+	return (WEXITSTATUS(data.exit_status));
 }

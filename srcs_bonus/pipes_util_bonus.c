@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 21:18:11 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/24 23:04:48 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:20:33 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ void	pipes_create(t_data *data, char **argv, char **envp)
 	while ((i < data->total_cmds) && (data->pid[i]))
 	{
 		close_pipes(data);
-		waitpid(data->pid[i], NULL, 0);
+		waitpid(data->pid[i], &data->exit_status, 0);
 		i++;
 	}
 	free_pid_pipes(data);
