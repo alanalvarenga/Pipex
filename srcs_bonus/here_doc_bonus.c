@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 21:35:54 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/23 22:58:34 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/27 00:10:02 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	fill_here_doc(t_data *data, char *limiter)
 	fd_line = dup(0);
 	while (1)
 	{
-		ft_putstr_fd("here_doc>", 1);
+		ft_putstr_fd("here_doc> ", 1);
 		line = get_next_line(fd_line);
 		if ((ft_strncmp(line, limiter, ft_strlen(limiter)) == 0)
 			&& (ft_strlen(line) - 1) == ft_strlen(limiter))
