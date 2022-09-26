@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 21:11:59 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/24 23:58:02 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/26 22:26:25 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ void	pipes_create(t_data *data, char **argv, char **envp);
 void	close_pipes(t_data *data);
 void	ft_init_here_doc(t_data *data, int argc, char **argv, char **envp);
 char	*find_path(char **envp);
+void	free_pid_pipes(t_data *data);
 
 #endif
