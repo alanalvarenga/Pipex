@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/14 22:01:09 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/21 02:00:11 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:46:07 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	put_spaces(char *args)
 	i = 0;
 	while (args[i])
 	{
-		if (args[i] == '\'')
+		if ((args[i] == '\'') && (args[i + 1] != '\0'))
 		{
 			i++;
 			while ((args[i] != '\'') && (args[i] != '\0'))
@@ -84,8 +84,9 @@ static char	*remove_quotes(char *args)
 
 void	parse_args(t_data *data, char *args)
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	char	*tmp;
 
 	y = 0;
 	change_spaces(args);
@@ -98,7 +99,9 @@ void	parse_args(t_data *data, char *args)
 		{
 			if (data->args_cmd[y][x] == '\'')
 			{
+				tmp = data->args_cmd[y];
 				data->args_cmd[y] = remove_quotes(data->args_cmd[y]);
+				free(tmp);
 				break ;
 			}
 			x++;

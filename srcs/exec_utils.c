@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:28:44 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/24 23:38:27 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:56:05 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,11 @@ void	child_in(t_data data, char **argv, char **envp)
 		ft_error_file("Invalid command 1\n", COMMAND_NOT_FOUND);
 	}
 	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
-		ft_error_file("execve 1 error\n", -1);
+	{
+		free_cmd(&data);
+		free_paths(&data);
+		ft_error_file("execve first error\n", -1);
+	}
 }
 
 void	child_out(t_data data, char **argv, char **envp)
@@ -83,5 +87,9 @@ void	child_out(t_data data, char **argv, char **envp)
 		ft_error_file("Invalid command 2\n", COMMAND_NOT_FOUND);
 	}
 	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
-		ft_error_file("execve 2 error\n", -1);
+	{
+		free_cmd(&data);
+		free_paths(&data);
+		ft_error_file("execve last error\n", -1);
+	}
 }

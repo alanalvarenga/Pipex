@@ -6,7 +6,7 @@
 /*   By: alachris <alachris@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:28:44 by alachris          #+#    #+#             */
-/*   Updated: 2022/09/26 22:27:14 by alachris         ###   ########.fr       */
+/*   Updated: 2022/09/26 23:22:43 by alachris         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,12 @@ void	child_in(t_data data, char **argv, char **envp, int i)
 		ft_error_file("Invalid command first\n", COMMAND_NOT_FOUND);
 	}
 	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
+	{
+		free_cmd(&data);
+		free_paths(&data);
+		free_pid_pipes(&data);
 		ft_error_file("execve first error\n", -1);
+	}
 }
 
 void	child_mid(t_data data, char **argv, char **envp, int i)
@@ -82,7 +87,12 @@ void	child_mid(t_data data, char **argv, char **envp, int i)
 		ft_error_file("Invalid command mid\n", COMMAND_NOT_FOUND);
 	}
 	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
+	{
+		free_cmd(&data);
+		free_paths(&data);
+		free_pid_pipes(&data);
 		ft_error_file("execve mid error\n", -1);
+	}
 }
 
 void	child_out(t_data data, char **argv, char **envp, int i)
@@ -103,5 +113,10 @@ void	child_out(t_data data, char **argv, char **envp, int i)
 		ft_error_file("Invalid command last\n", COMMAND_NOT_FOUND);
 	}
 	if ((execve(data.cmd, data.args_cmd, envp)) < 0)
+	{
+		free_cmd(&data);
+		free_paths(&data);
+		free_pid_pipes(&data);
 		ft_error_file("execve last error\n", -1);
+	}
 }
