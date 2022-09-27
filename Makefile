@@ -18,7 +18,7 @@ all: $(NAME)
 bonus: $(NAME_BONUS)
 
 $(LIBFT):
-	make -C $(LIBFT_PATH) --no-print-directory
+	make -C $(LIBFT_PATH)
 
 $(NAME): $(LIBFT)
 	$(CC) $(CFLAGS) -o $@ $(SRC) $(LIBFT)
